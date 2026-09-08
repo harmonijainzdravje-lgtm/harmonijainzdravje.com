@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zemljevid – Harmonija in zdravje</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html, body, #map { margin: 0; height: 100%; background: #f3efe6; font-family: 'Figtree', 'Helvetica Neue', Arial, sans-serif; }
+  .leaflet-container { background: #f3efe6; }
+  .leaflet-tile-pane { filter: grayscale(1) sepia(0.25) brightness(1.04) contrast(0.85); }
+  .pin { width: 22px; height: 22px; border-radius: 50%; background: #384c42; border: 3px solid #f3efe6; box-shadow: 0 2px 10px rgba(0,0,0,.25); position: relative; }
+  .pin::after { content: ''; position: absolute; inset: -16px; border-radius: 50%; border: 2px solid #384c42; animation: pulse 2.6s ease-out infinite; }
+  @keyframes pulse { 0% { transform: scale(.45); opacity: .9; } 100% { transform: scale(1.15); opacity: 0; } }
+  .label { background: #384c42; color: #f3efe6; border: 0; border-radius: 10px; padding: 8px 12px; font-weight: 600; font-size: 13px; line-height: 1.3; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+  .label::before { border-top-color: #384c42; }
+  .leaflet-control-zoom { border: 0 !important; box-shadow: 0 4px 16px rgba(0,0,0,.15) !important; border-radius: 10px !important; overflow: hidden; }
+  .leaflet-control-zoom a { background: #384c42 !important; color: #f3efe6 !important; border-bottom: 1px solid rgba(255,255,255,.15) !important; width: 34px !important; height: 34px !important; line-height: 34px !important; font-weight: 500; }
+  .leaflet-control-attribution { background: rgba(255,255,255,.75); color: #5b6b63; font-size: 11px; }
+  .leaflet-control-attribution a { color: #384c42; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  var pos = [46.16578, 14.57171]; // Slovenska cesta 24, 1234 Mengeš
+  var map = L.map('map', { center: pos, zoom: 16, scrollWheelZoom: false });
+  map.attributionControl.setPrefix(false);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors', maxZoom: 19 }).addTo(map);
+  var icon = L.divIcon({ className: '', html: '<div class="pin"></div>', iconSize: [22, 22], iconAnchor: [11, 11] });
+  L.marker(pos, { icon: icon }).addTo(map)
+    .bindTooltip('Harmonija in zdravje<br>Slovenska cesta 24', { permanent: true, direction: 'top', offset: [0, -18], className: 'label' });
+</script>
+</body>
+</html>
