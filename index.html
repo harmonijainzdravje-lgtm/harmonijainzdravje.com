@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Harmonija in zdravje: SCENAR terapija, Bownova terapija, masaže · Mengeš</title>
+  <meta name="description" content="SCENAR terapija, Bownova terapija in masaže v Mengšu. Tatiana Grigoryeva dr. med. in Miha Premk. Uradni uvoznik naprav SCENAR. Pokličite 040 580 902.">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:title" content="Harmonija in zdravje">
+  <meta property="og:description" content="SCENAR terapija, Bownova terapija in masaže v Mengšu. Uradni uvoznik naprav SCENAR.">
+  <meta property="og:image" content="assets/thumbnail.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f3efe6; color: var(--ink, #1d2a24); font-family: 'Figtree', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: var(--deep, #384c42); text-decoration: none; }
+    a:hover { color: var(--accent, #5f8c74); }
+    img { display: block; max-width: 100%; }
+    p { margin: 0; text-wrap: pretty; }
+    h1, h2, h3 { margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; text-wrap: balance; }
+    button { font-family: inherit; cursor: pointer; }
+    @keyframes drift { from { transform: translateX(-56px); } to { transform: translateX(56px); } }
+    @keyframes bob { from { transform: translateY(-7px); } to { transform: translateY(7px); } }
+    @keyframes driftY { from { transform: translateY(-48px); } to { transform: translateY(48px); } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <header style="position:sticky; top:0; z-index:20; background:rgba(243,239,230,0.9); backdrop-filter:blur(12px); border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 12%, transparent);">
+    <div style="max-width:1320px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:16px;">
+      <a href="#domov" style="flex:none;">
+        <img src="images/Miha_P__VIZITKA_logo-500.webp" alt="Harmonija in zdravje" style="height:42px; width:auto;">
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="flex:1; display:flex; justify-content:flex-end; align-items:center; gap:6px 20px; flex-wrap:wrap;">
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+            <a href="{{ item.href }}" style="font-size:14px; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; padding:6px 0; border-bottom:1.5px solid {{ item.border }}; color: {{ item.color }};">{{ item.label }}</a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Meni" aria-expanded="{{ menuOpen }}" style="margin-left:auto; width:48px; height:48px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; background:transparent; border:0; padding:0; cursor:pointer;">
+          <span style="width:24px; height:2px; background:var(--ink, #1d2a24); display:block;"></span>
+          <span style="width:24px; height:2px; background:var(--ink, #1d2a24); display:block;"></span>
+          <span style="width:24px; height:2px; background:var(--ink, #1d2a24); display:block;"></span>
+        </button>
+      </sc-if>
+    </div>
+  </header>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenu }}" style="position:fixed; inset:0; z-index:40; background:rgba(29,42,36,0.45);"></div>
+    <nav style="position:fixed; top:0; right:0; bottom:0; z-index:41; width:min(84vw, 340px); box-sizing:border-box; background:var(--deep, #384c42); padding:24px 28px; display:flex; flex-direction:column; gap:6px; box-shadow:-12px 0 40px rgba(0,0,0,0.3);">
+      <button onClick="{{ closeMenu }}" aria-label="Zapri meni" style="align-self:flex-end; width:44px; height:44px; background:transparent; border:0; color:#f3efe6; font-size:26px; line-height:1; cursor:pointer; margin-bottom:8px;">×</button>
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" onClick="{{ closeMenu }}" style="font-family:'Instrument Serif', Georgia, serif; font-size:28px; color:#f3efe6; padding:12px 0; border-bottom:1px solid rgba(243,239,230,0.14);">{{ item.label }}</a>
+      </sc-for>
+      <a href="tel:+38640580902" style="margin-top:24px; display:flex; justify-content:center; align-items:center; min-height:52px; background:#f3efe6; color:var(--deep, #384c42); border-radius:999px; font-weight:600; font-size:17px;">Pokličite 040 580 902</a>
+      <a href="mailto:harmonijainzdravje@gmail.com" style="margin-top:10px; text-align:center; color:var(--on-deep-muted, #cddad3); font-size:15px;">harmonijainzdravje@gmail.com</a>
+    </nav>
+  </sc-if>
+
+  <main style="flex:1;">
+
+    <!-- DOMOV -->
+    <sc-if value="{{ isDomov }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Domov">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:32px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">Mengeš · SCENAR · Bowen · Masaže</p>
+              <h1 style="font-size:clamp(42px, 7.2vw, 108px); line-height:0.98;">Današnja skrb <em style="color:var(--on-deep-muted, #cddad3);">za zdravje</em> mi daje upanje za boljši <em style="color:var(--on-deep-muted, #cddad3);">jutri!</em></h1>
+              <p style="font-size:21px; color:var(--on-deep-muted, #cddad3); max-width:480px; line-height:1.45;">S pomočjo SCENAR tehnologije z vami na poti do boljšega zdravja.</p>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <a href="tel:+38640580902" style="background:#f3efe6; color:var(--deep, #384c42); padding:16px 28px; border-radius:999px; font-weight:600; font-size:17px;" style-hover="background:var(--on-deep-muted, #cddad3); color:var(--deep, #384c42);">Pokličite 040 580 902</a>
+                <a href="#scenar" style="color:#f3efe6; padding:16px 8px; font-weight:600; font-size:17px; border-bottom:1.5px solid var(--accent, #5f8c74);" style-hover="color:var(--on-deep-muted, #cddad3);">Kako deluje SCENAR →</a>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 28px; font-size:15px; letter-spacing:0.04em; color:var(--on-deep-label, #b9cbc1);">
+                <a href="https://maps.app.goo.gl/gxW5D7yKKbYSVnFy8" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:10px; color:#f3efe6;" style-hover="color:var(--on-deep-muted, #cddad3);"><span style="letter-spacing:0.1em;">★★★★★</span><span><strong style="font-weight:600;">5,0</strong> · 35 mnenj →</span></a>
+                <p style="display:flex; align-items:center; gap:10px;"><span style="width:8px; height:8px; border-radius:999px; background:var(--on-deep-label, #b9cbc1); flex:none;"></span>Uradni uvoznik naprav SCENAR</p>
+              </div>
+            </div>
+            <img src="images/DSC02166-1500.webp" alt="SCENAR terapija" style="width:100%; max-width:560px; margin:0 auto; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+          </div>
+          {{ waveToLight }}
+        </section>
+
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 7vw, 72px) 28px 40px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:24px 64px; align-items:end; margin-bottom:64px;">
+              <h2 style="font-size:clamp(38px, 5.5vw, 80px); line-height:1;">Tri poti do <em>ravnovesja</em></h2>
+              <p style="font-size:20px; color:var(--muted-ink, #5b6b63); max-width:440px;">Neinvazivne metode, ki telesu ne vsiljujejo sprememb, temveč ga spodbudijo, da si pomaga samo.</p>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:48px 40px;">
+              <a href="#scenar" style="display:flex; flex-direction:column; gap:20px; color:var(--ink, #1d2a24);" style-hover="color:var(--accent, #5f8c74);">
+                <img src="images/DSC02385-1000.webp" alt="SCENAR terapija" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div style="display:flex; gap:20px; align-items:flex-start;">
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:22px; color:var(--accent, #5f8c74); padding-top:8px;">01</span>
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <h3 style="font-size:40px; line-height:1;">SCENAR terapija</h3>
+                    <p style="color:var(--muted-ink, #5b6b63);">Neinvazivna elektroterapija brez igel, ki spodbudi telo, da si pomaga samo. Pomaga pri akutnih in kroničnih bolečinah, poškodbah, krepitvi odpornosti in hormonskih neravnovesjih.</p>
+                    <span style="font-weight:600;">Preberi več →</span>
+                  </div>
+                </div>
+              </a>
+              <a href="#bowen" style="display:flex; flex-direction:column; gap:20px; color:var(--ink, #1d2a24);" style-hover="color:var(--accent, #5f8c74);">
+                <img src="images/1000001462-1000.webp" alt="Bownova terapija" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div style="display:flex; gap:20px; align-items:flex-start;">
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:22px; color:var(--accent, #5f8c74); padding-top:8px;">02</span>
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <h3 style="font-size:40px; line-height:1;">Bownova terapija</h3>
+                    <p style="color:var(--muted-ink, #5b6b63);">Nežna manualna tehnika: mehki gibi na določenih točkah sprožijo globoko sprostitev in telesu omogočijo, da se samo uravna. Za bolečine v hrbtu, vratu in ramenih, glavobole, športne poškodbe ter stres in izgorelost.</p>
+                    <span style="font-weight:600;">Preberi več →</span>
+                  </div>
+                </div>
+              </a>
+              <a href="#masaze" style="display:flex; flex-direction:column; gap:20px; color:var(--ink, #1d2a24);" style-hover="color:var(--accent, #5f8c74);">
+                <img src="images/DSC02268-1000.webp" alt="Masaže" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div style="display:flex; gap:20px; align-items:flex-start;">
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:22px; color:var(--accent, #5f8c74); padding-top:8px;">03</span>
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <h3 style="font-size:40px; line-height:1;">Masaže</h3>
+                    <p style="color:var(--muted-ink, #5b6b63);">Klasična in terapevtska masaža ter refleksoterapija. Za sprostitev mišic, boljšo prekrvavitev, hitrejšo regeneracijo in manj stresa. Čas, ki si ga vzamete zase.</p>
+                    <span style="font-weight:600;">Preberi več →</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          {{ waveToDark }}
+        </section>
+
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:40px 28px 72px; display:flex; flex-direction:column; gap:40px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">Mnenja strank</p>
+                <h2 style="font-size:clamp(40px, 4.5vw, 64px); line-height:1;">Kar pravijo tisti, ki so <em style="color:var(--on-deep-muted, #cddad3);">poskusili</em></h2>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px 16px; flex-wrap:wrap;">
+                <button onClick="{{ prevTestimonial }}" aria-label="Prejšnje mnenje" style="width:52px; height:52px; border-radius:999px; border:1.5px solid var(--accent, #5f8c74); background:transparent; color:#f3efe6; font-size:22px;" style-hover="background:var(--accent, #5f8c74);">←</button>
+                <button onClick="{{ nextTestimonial }}" aria-label="Naslednje mnenje" style="width:52px; height:52px; border-radius:999px; border:1.5px solid var(--accent, #5f8c74); background:transparent; color:#f3efe6; font-size:22px;" style-hover="background:var(--accent, #5f8c74);">→</button>
+                <span style="font-family:'Instrument Serif', Georgia, serif; font-size:22px; color:var(--on-deep-label, #b9cbc1); margin-left:8px;">{{ testimonialCounter }}</span>
+                
+              </div>
+            </div>
+            <figure style="margin:0; display:grid; grid-template-columns:auto minmax(0, 1fr); gap:8px 28px; align-items:start;">
+              <span style="font-family:'Instrument Serif', Georgia, serif; font-size:120px; line-height:0.6; color:var(--accent, #5f8c74);">“</span>
+              <div style="display:flex; flex-direction:column; gap:24px; padding-top:8px;">
+                <blockquote style="margin:0; font-family:'Instrument Serif', Georgia, serif; font-size:21px; line-height:1.4; color:#f3efe6; columns:2 340px; column-gap:56px; text-wrap:pretty;">{{ testimonial.text }}</blockquote>
+                <figcaption style="font-weight:600; letter-spacing:0.12em; color:var(--on-deep-label, #b9cbc1); align-self:flex-end; text-align:right;">{{ testimonial.who }}</figcaption>
+              </div>
+            </figure>
+          </div>
+          {{ waveToLight }}
+        </section>
+
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 7vw, 72px) 28px 40px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:48px 64px; align-items:end;">
+              <div style="display:flex; flex-direction:column; gap:20px; padding-bottom:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Ekipa</p>
+                <h2 style="font-size:clamp(38px, 5.5vw, 80px); line-height:1;">Z vami <em>sva</em></h2>
+                <p style="font-size:19px; color:var(--muted-ink, #5b6b63); max-width:380px;">Zdravnica in terapevt, ki delava celostno in si vzameva čas za vsakega človeka.</p>
+                <a href="#kontakt" style="font-weight:600; border-bottom:1.5px solid var(--accent, #5f8c74); align-self:flex-start; padding-bottom:4px;">Spoznajte nas →</a>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <img src="images/MK301577-800.webp" alt="Tatiana Grigoryeva" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div>
+                  <p style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1.1;">Tatiana Grigoryeva, dr. med.</p>
+                  <p style="color:var(--muted-ink, #5b6b63);">SCENAR terapevtka</p>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <img src="images/MK301574-800.webp" alt="Miha Premk" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div>
+                  <p style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1.1;">Miha Premk</p>
+                  <p style="color:var(--muted-ink, #5b6b63);">SCENAR in Bownov terapevt, maser</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{ waveToDark }}
+        </section>
+
+        <section style="background:var(--deep, #384c42); color:#f3efe6;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 8vw, 80px) 28px clamp(56px, 9vw, 96px); display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:20px; align-items:flex-start;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">Naročite se</p>
+              <a href="tel:+38640580902" style="font-family:'Instrument Serif', Georgia, serif; font-size:clamp(48px, 6.5vw, 104px); line-height:0.95; letter-spacing:-0.03em; color:#f3efe6;" style-hover="color:var(--on-deep-muted, #cddad3);">040 580 902</a>
+              <p style="font-size:19px; color:var(--on-deep-muted, #cddad3);">Pon. do pet. 8:00 do 16:00 · <a href="mailto:harmonijainzdravje@gmail.com" style="text-decoration:underline; color:#f3efe6;">harmonijainzdravje@gmail.com</a></p>
+              <div style="display:flex; flex-direction:column; gap:8px; margin-top:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">Naša lokacija</p>
+                <p style="font-family:'Instrument Serif', Georgia, serif; font-size:28px; line-height:1.15;">Slovenska cesta 24, 1234 Mengeš</p>
+              </div>
+            </div>
+            <iframe title="Zemljevid: Slovenska cesta 24, Mengeš" src="./map/index.html" loading="lazy" style="width:100%; aspect-ratio:4/3; border:0; border-radius:24px; background:var(--tint, #dfe7e3);"></iframe>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- SCENAR -->
+    <sc-if value="{{ isScenar }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="SCENAR terapija">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:28px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">01 · Terapija</p>
+              <h1 style="font-size:clamp(42px, 7vw, 104px); line-height:0.98;">SCENAR <em style="color:var(--on-deep-muted, #cddad3);">terapija</em></h1>
+              <p style="font-size:21px; color:var(--on-deep-muted, #cddad3); max-width:520px; line-height:1.45;">Univerzalna neinvazivna metoda za reševanje zdravstvenih težav. Je sodobna oblika elektroterapije, ki temelji na pristopih elektro-akupunkture.</p>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <a href="tel:+38640580902" style="background:#f3efe6; color:var(--deep, #384c42); padding:16px 28px; border-radius:999px; font-weight:600; font-size:17px;" style-hover="background:var(--on-deep-muted, #cddad3); color:var(--deep, #384c42);">Naročite se · 040 580 902</a>
+                <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20SCENAR%20terapija" style="color:#f3efe6; padding:16px 8px; font-weight:600; font-size:17px; border-bottom:1.5px solid var(--accent, #5f8c74);" style-hover="color:var(--on-deep-muted, #cddad3);">Pišite nam</a>
+              </div>
+            </div>
+            <img src="images/DSC02385-1500.webp" alt="SCENAR terapija" style="width:100%; max-width:560px; margin:0 auto; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+          </div>
+          {{ waveToLight }}
+        </section>
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:72px 28px 32px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:40px 64px; align-items:center;">
+            <img src="images/DSC02161-1000.webp" alt="Naprava SCENAR" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <h2 style="font-size:40px; line-height:1;">Kaj je <em>SCENAR</em></h2>
+              <p style="font-size:20px;">Scenar je fizioterapevtska naprava, ki povrne ravnovesje v vaše telo. Gre za neinvazivno elektro-akupunkturo s katero spodbujamo adaptacijske in regulacijske procese v telesu.</p>
+              <p style="color:var(--muted-ink, #5b6b63);">Beseda SCENAR je akronim in pomeni Samodejno Kontrolirana Elektro Nevro Adaptivna Regulacija kar je obenem ime za visoko tehnološki pristop ter napravo s katero izvajamo terapijo. Izoblikovan pristop v SCENAR terapiji nam omogoča tako diagnostični kot tudi terapevtski učinek.</p>
+            </div>
+          </div>
+          <div style="max-width:1320px; margin:0 auto; padding:40px 28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:32px 64px; align-items:start;">
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <h2 style="font-size:40px; line-height:1;"><em>Učinek</em></h2>
+              <p style="color:var(--muted-ink, #5b6b63);">SCENAR terapije vplivajo na proces adaptacije in regulacije ter omogočajo neuravnovešenemu sistemu pospešiti pot do samozdravljenja.</p>
+            </div>
+            <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Uravnavanje mišičnega tonusa</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Uravnavanje hormonskega nivoja in vegetativnega živčnega sistema</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljšanje krvnega obtoka in normalizacija tonusa žilnih sten</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Spodbujanje limfne drenaže</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšanje otekanja mehkih tkiv</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pospeševanje celjenja ran</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Lajšanje bolečin oziroma protibolečinski učinek</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Reanimacijski učinek</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Protivnetni učinek</li>
+            </ul>
+          </div>
+          <div style="max-width:1320px; margin:0 auto; padding:40px 28px; display:flex; flex-direction:column; gap:32px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:16px 64px; align-items:end;">
+              <h2 style="font-size:40px; line-height:1;">Indikacije in <em>kontraindikacije</em></h2>
+              <p style="color:var(--muted-ink, #5b6b63);">Indikacije za Scenar terapijo ne temeljijo na konvencionalnih medicinskih diagnozah. SCENAR se lahko uporablja tako za zdravljenje lokalnih procesov kot tudi sistemskih obolenj. Spekter indikacij za tovrstno terapijo je zelo širok in se lahko uporablja v vseh vejah sodobne medicine.</p>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:32px 64px; align-items:start;">
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Indikacije</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolečina različne etiologije</strong></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolezni mišično-skeletnega sistema</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. poškodbe mehkih tkiv, artritis, artroza, spondilopatija, adhezivni kapsulitis, miozitis, bursitis, hernija, ...)</span></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolezni živčevja</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. vnetja, periferne okvare živcev (sindrom karpalnega kanala), išias, radikulopatije, multipla skleroza, migrene, ...)</span></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolezni zgornjih in spodnjih dihalnih poti</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. vnetje obnosnih votlin, vnetje žrela in grla, bronhialna astma, bronhitis, ponavljajoče se okužbe, ...)</span></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolezni prebavnega trakta</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. gastritis, zgaga, sindrom razdražljivega črevesa, zaprtje, bolečine, ...)</span></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Bolezni urogenitalnega trakta</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. vnetje, motnje plodnosti, motnje ciklusa, PMS, razdražljiv mehur, ...)</span></li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);"><strong style="font-weight:600;">Kožne bolezni</strong> <span style="color:var(--muted-ink, #5b6b63);">(npr. nevrodermitis ali atopijski dermatitis, luskavica, ...)</span></li>
+                </ul>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Kontraindikacije</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Delovanje v projekcije srčnega spodbujevalnika ali drugih elektronskih implantatov ali slušnega aparata</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Samozdravljenje v akutnem alkoholnem opoju</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Huda psihiatrična patologija</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Delovanje na trebuhu v projekcije noseče maternice</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Aplikacija v projekcije malignoma, če ne gre za terminalno fazo</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Akutna infekcijska obolenja neznane etiologije</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Bolezni srčno-žilnega sistema</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Bolezni čutnih organov</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Bolezni imunskega sistema (alergije, toksične obremenitve, ...)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="max-width:1320px; margin:0 auto; padding:40px 28px 56px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:32px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <h2 style="font-size:40px; line-height:1;">Kako poteka <em>obisk</em></h2>
+              <ol style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px;">
+                <li style="display:flex; gap:16px;"><span style="font-family:'Instrument Serif', Georgia, serif; color:var(--accent, #5f8c74); font-size:22px;">1</span><span>Pogovor o vaših težavah in ciljih.</span></li>
+                <li style="display:flex; gap:16px;"><span style="font-family:'Instrument Serif', Georgia, serif; color:var(--accent, #5f8c74); font-size:22px;">2</span><span>Terapija z napravo SCENAR po koži, neboleče in brez igel.</span></li>
+                <li style="display:flex; gap:16px;"><span style="font-family:'Instrument Serif', Georgia, serif; color:var(--accent, #5f8c74); font-size:22px;">3</span><span>Priporočilo glede števila in pogostosti nadaljnjih terapij.</span></li>
+              </ol>
+            </div>
+            <div style="background:var(--tint, #dfe7e3); border-radius:24px; padding:32px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Za domačo uporabo</p>
+              <p>Napravo SCENAR se lahko naučite uporabljati tudi doma. Svetujemo pri izbiri naprave in vas naučimo uporabe.</p>
+              <a href="#izdelki" style="font-weight:600; border-bottom:1.5px solid var(--accent, #5f8c74); align-self:flex-start; padding-bottom:4px;">Poglejte naprave →</a>
+            </div>
+          </div>
+          {{ waveToDark }}
+        </section>
+        <section style="background:var(--deep, #384c42); color:#f3efe6;">
+          <div style="max-width:1320px; margin:0 auto; padding:40px 28px 96px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <h2 style="font-size:clamp(40px, 4.5vw, 64px); line-height:1;">Cilji <em style="color:var(--on-deep-muted, #cddad3);">terapije</em></h2>
+              <p style="color:var(--on-deep-muted, #cddad3);">Telo nas opozarja na nepravilnosti z različnimi simptomi in znaki. Ob tem je lahko vzrok težav povsem drugje. Pomembno je, da si pravilno razlagamo govorico telesa in ustrezno opredelimo vzrok težav ter si vzamemo dovolj časa za okrevanje.</p>
+              <p style="color:var(--on-deep-muted, #cddad3);">Z vsakim potlačenim alarmnim signalom je telo prikrajšano za prilagoditev in odpravo vzroka. Na tak način se oddaljujemo od zdravega načina življenja in pripravljamo pot kroničnim boleznim.</p>
+              <p style="font-size:20px;">Zato je cilj Scenar terapije prepoznati aktualne težave (tukaj in zdaj), prepoznati telesne signale, ustvariti prilagoditveno reakcijo, odstraniti nastale blokade in aktivirati procese samozdravljenja.</p>
+              <a href="tel:+38640580902" style="background:#f3efe6; color:var(--deep, #384c42); padding:16px 28px; border-radius:999px; font-weight:600; font-size:17px; align-self:flex-start; margin-top:8px;" style-hover="background:var(--on-deep-muted, #cddad3); color:var(--deep, #384c42);">Naročite se · 040 580 902</a>
+            </div>
+            <img src="images/DSC02177-1000.webp" alt="SCENAR terapija" style="width:100%; max-width:520px; margin:0 auto; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- BOWEN -->
+    <sc-if value="{{ isBowen }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Bownova terapija">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:28px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">02 · Terapija</p>
+              <h1 style="font-size:clamp(42px, 7vw, 104px); line-height:0.98;">Bownova <em style="color:var(--on-deep-muted, #cddad3);">terapija</em></h1>
+              <p style="font-size:21px; color:var(--on-deep-muted, #cddad3); max-width:520px; line-height:1.45;">Nežna, celostna manualna tehnika, ki preko mišic, fascije in živčnega sistema spodbuja telo, da ponovno vzpostavi ravnovesje in aktivira svoje naravne sposobnosti samozdravljenja.</p>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <a href="tel:+38640580902" style="background:#f3efe6; color:var(--deep, #384c42); padding:16px 28px; border-radius:999px; font-weight:600; font-size:17px;" style-hover="background:var(--on-deep-muted, #cddad3); color:var(--deep, #384c42);">Naročite se · 040 580 902</a>
+                <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20Bownova%20terapija" style="color:#f3efe6; padding:16px 8px; font-weight:600; font-size:17px; border-bottom:1.5px solid var(--accent, #5f8c74);" style-hover="color:var(--on-deep-muted, #cddad3);">Pišite nam</a>
+              </div>
+            </div>
+            <img src="images/1000001462-1500.webp" alt="Bownova terapija" style="width:100%; max-width:560px; margin:0 auto; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+          </div>
+          {{ waveToLight }}
+        </section>
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 7vw, 72px) 28px 40px; display:flex; flex-direction:column; gap:72px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:32px 64px; align-items:start; align-items:center;">
+              <img src="images/1000001465-1000.webp" alt="Bownova terapija" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+              <div style="display:flex; flex-direction:column; gap:20px;">
+                <h2 style="font-size:40px; line-height:1;">Kako <em>deluje</em></h2>
+                <p style="font-size:20px;">Bownova terapija je nežna, celostna manualna tehnika, ki preko mišic, fascije in živčnega sistema spodbuja telo, da ponovno vzpostavi ravnovesje in aktivira svoje naravne sposobnosti samozdravljenja. Z natančnimi, mehkimi gibi na določenih točkah telesa terapevt pošilja signale živčnemu sistemu, kar sproži globoko sprostitev in omogoči telesu, da se začne ponovno uravnavati.</p>
+                <p style="color:var(--muted-ink, #5b6b63);">Ker deluje celostno, Bownova terapija ne vpliva le na fizično telo, ampak tudi na čustveno in psihično ravnovesje. Sproščanje telesa pogosto vodi v zmanjšanje stresa, tesnobe in notranje napetosti ter izboljšanje splošnega počutja.</p>
+                <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px; align-self:flex-start;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Naročite se · 040 580 902</a>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:32px 64px; align-items:start;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <h2 style="font-size:40px; line-height:1;">Učinki <em>terapije</em></h2>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Globoka sprostitev telesa in živčnega sistema</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšanje mišične napetosti in bolečin</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Boljša gibljivost in lahkotnost v telesu</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljšanje kakovosti spanja</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšanje stresa in notranje napetosti</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Bolj sproščeno in globlje dihanje</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Več energije in hitrejša regeneracija</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Občutek notranjega miru in ravnovesja</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Podpora telesu pri naravnih procesih samozdravljenja</li>
+                </ul>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <h2 style="font-size:40px; line-height:1;"><em>Indikacije</em></h2>
+                <p style="color:var(--muted-ink, #5b6b63);">Bownova terapija pomaga pri:</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">bolečinah v hrbtu, vratu in ramenih</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">glavobolih in migrenah</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">težavah s sklepi</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">športnih poškodbah</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">stresu, napetosti in izgorelosti</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">težavah z dihanjem (npr. astma)</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">hormonskem neravnovesju</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">splošnem slabem počutju</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          {{ waveToDark }}
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- MASAŽE -->
+    <sc-if value="{{ isMasaze }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Masaže">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:48px 64px; align-items:center;">
+            <div style="display:flex; flex-direction:column; gap:28px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">03 · Klasična · Terapevtska · Refleksoterapija</p>
+              <h1 style="font-size:clamp(42px, 7vw, 104px); line-height:0.98;">Čas <em style="color:var(--on-deep-muted, #cddad3);">zase</em></h1>
+              <p style="font-size:21px; color:var(--on-deep-muted, #cddad3); max-width:520px; line-height:1.45;">V življenju je pomembno, da si vzamemo čas zase in masaža je ena izmed tehnik sproščanja telesa ter duše.</p>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <a href="tel:+38640580902" style="background:#f3efe6; color:var(--deep, #384c42); padding:16px 28px; border-radius:999px; font-weight:600; font-size:17px;" style-hover="background:var(--on-deep-muted, #cddad3); color:var(--deep, #384c42);">Naročite se · 040 580 902</a>
+                <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20Masa%C5%BEa" style="color:#f3efe6; padding:16px 8px; font-weight:600; font-size:17px; border-bottom:1.5px solid var(--accent, #5f8c74);" style-hover="color:var(--on-deep-muted, #cddad3);">Pišite nam</a>
+              </div>
+            </div>
+            <img src="images/DSC02268-1500.webp" alt="Masaža" style="width:100%; max-width:560px; margin:0 auto; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+          </div>
+          {{ waveToLight }}
+        </section>
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 7vw, 72px) 28px 40px; display:flex; flex-direction:column; gap:80px;">
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap:32px 64px; align-items:start;">
+              <img src="images/DSC02245-1000.webp" alt="Klasična masaža" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">01</p>
+                <h2 style="font-size:40px; line-height:1;">Klasična <em>masaža</em></h2>
+                <p style="color:var(--muted-ink, #5b6b63);">Gre za masažo bolj rahlega pritiska. Njen namen je splošna sprostitev ter sprostitev mišic, izboljšanje krvnega in limfnega obtoka, hitrejše odplavljanje metabolnih produktov. Masaža ne predstavlja nobenih bolečin saj drugače lahko pride do mišične napetosti in ob tem ne pridemo do željenih rezultatov.</p>
+                <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px; align-self:flex-start;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Naročite se · 040 580 902</a>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Indikacije</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljšanje krvnega in limfnega obtoka</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Hitrejše odplavljanje metabolnih produktov</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšanje oteklin</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Za boljšo in hitrejšo rehabilitacijo</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Povečanje delovne sposobnosti mišic</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljšanje sklepne gibljivosti</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Povečanje elastičnosti, odpornosti in vitalnosti kože</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšanje stresa in izboljšanje psihičnega počutja</li>
+                </ul>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Kontraindikacije</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri lokalnih vnetjih</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri kožnih obolenjih</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">V primeru varikoznega sindroma</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri svežih in odprtih ranah</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri akutni travmi</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri hujši arterijski hipertenziji</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri povišani telesni temperaturi</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri obsežnih oteklinah zaradi srčne in ledvične insuficience</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri malignih tumorjih</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Če bi z masažo izzvali bolečino ali mišični spazem</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pri težjih mentalnih stanjih</li>
+                </ul>
+              </div>
+            </article>
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap:32px 64px; align-items:start;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">02</p>
+                <h2 style="font-size:40px; line-height:1;">Terapevtska <em>masaža</em></h2>
+                <p style="color:var(--muted-ink, #5b6b63);">Je masaža z močnejšim pritiskom, ki ima takojšne pozitivne učinke na telo. Pri terapevtski masaži se bolj osredotočimo na področja napetosti mišičnih vlaken. Mišična napetost se lahko pojavi ob prekomerni obremenitvi, zaradi športnih aktivnosti, posledica slabe drže ali pa zaradi obsežnega sedečega dela in hitrega tempa življenja. Te dejavniki močno vplivajo na naš življenjski slog zato je pomembno, da poskrbimo za svoje telo saj je naše fizično in psihično stanje odvisno od tega. Kljub koristim, ki jih prinaša masaža ni nadomestilo za redno zdravstveno oskrbo.</p>
+                <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px; align-self:flex-start;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Naročite se · 040 580 902</a>
+              </div>
+              <img src="images/DSC02265-1000.webp" alt="Terapevtska masaža" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+            </article>
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap:32px 64px; align-items:start;">
+              <img src="images/658904914-huge-1000.webp" alt="Refleksoterapija" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">03</p>
+                <h2 style="font-size:40px; line-height:1;"><em>Refleksoterapija</em></h2>
+                <p style="color:var(--muted-ink, #5b6b63);">Refleksoterapija je masaža kjer s pritiskanjem določenih točk na stopalu izzovemo refleks in s tem vzbudimo proces samozdravljenja organizma. Z masiranjem cone organa vplivamo direktno nanj in ga spodbujamo k uravnoteženemu delovanju. Je naravna tehnika zdravljenja, ki je priporočljiva pri prebavnih motnjah, menstrualnih težavah, pri glavobolih, pri težavah stopal ali pa jo uporabljamo samo za sprostitev.</p>
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Učinki</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Popolna sprostitev telesa</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljša se prekrvavitev</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Dvig energije</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Izboljša se funkcija organov</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Telo spodbujamo k pravilnemu delovanju</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Spodbudimo zdravilne procese v telesu</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Razstrupljanje telesa</li>
+                </ul>
+                <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px; align-self:flex-start;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Naročite se · 040 580 902</a>
+              </div>
+            </article>
+          </div>
+          {{ waveToDark }}
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- IZDELKI -->
+    <sc-if value="{{ isIzdelki }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Izdelki">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:24px 64px; align-items:end;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">Izdelki</p>
+              <h1 style="font-size:clamp(40px, 6vw, 88px); line-height:0.98;">SCENAR za <em style="color:var(--on-deep-muted, #cddad3);">domačo</em> uporabo</h1>
+            </div>
+            <p style="font-size:20px; color:var(--on-deep-muted, #cddad3); max-width:480px;">Nakup poteka osebno, po telefonu ali e-pošti. Svetujemo pri izbiri naprave in vas naučimo uporabe.</p>
+          </div>
+          {{ waveToLight }}
+        </section>
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:56px 28px 40px; display:flex; flex-direction:column; gap:80px;">
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:32px 64px; align-items:start;">
+              <img src="images/phoca_thumb_l__en-01-1000.webp" alt="SCENAR SuperPRO" style="width:100%; aspect-ratio:1; object-fit:contain; background:#fbf9f4; border-radius:24px; padding:24px; box-sizing:border-box;">
+              <div style="display:flex; flex-direction:column; gap:18px;">
+                <div style="display:flex; justify-content:space-between; gap:16px 24px; align-items:baseline; flex-wrap:wrap;">
+                  <h2 style="font-size:40px; line-height:1;">SCENAR SuperPRO</h2>
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:24px; color:var(--accent, #5f8c74);">Za ceno nas kontaktirajte</span>
+                </div>
+                <p style="color:var(--muted-ink, #5b6b63);">Profesionalne naprave SCENAR so enostavne in lahke, omogočajo neinvazivno, interaktivno električno delovanje preko pacientove kože. SCENAR je naprava s širokimi medicinskimi zmogljivostmi in visoko zanesljivostjo. Namenjen je kot analgetični stimulator in omogoča zdravljenje različnih zdravstvenih stanj.</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">SCENAR je majhna naprava, ki ne zahteva kalibracije ali posebnega vzdrževanja</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zdravljenje je neinvazivno, neboleče in za pacienta udobno</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Tehnologija dokazano zagotavlja učinkovito lajšanje bolečin in hitrejše okrevanje. Lahko je tudi zelo učinkovit pri določenih kroničnih stanjih, pri katerih druga zdravljenja niso bila uspešna</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Kontraindikacije so relativne</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Združljiv z drugimi terapijami</li>
+                </ul>
+                <p style="font-weight:600;">Kontaktirajte nas glede roka dobave.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Pokličite · 040 580 902</a>
+                  <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20SCENAR%20SuperPRO" style="border:1.5px solid var(--deep, #384c42); color:var(--deep, #384c42); padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--tint, #dfe7e3);">Pišite nam</a>
+                </div>
+              </div>
+            </article>
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:32px 64px; align-items:start;">
+              <img src="images/phoca_thumb_l__en-04-1000.webp" alt="SCENAR Sport D" style="width:100%; aspect-ratio:1; object-fit:contain; background:#fbf9f4; border-radius:24px; padding:24px; box-sizing:border-box;">
+              <div style="display:flex; flex-direction:column; gap:18px;">
+                <div style="display:flex; justify-content:space-between; gap:16px 24px; align-items:baseline; flex-wrap:wrap;">
+                  <h2 style="font-size:40px; line-height:1;">SCENAR Sport D</h2>
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:34px; color:var(--deep, #384c42); white-space:nowrap;">899 € <s style="font-size:20px; color:var(--muted-ink, #5b6b63);">999 €</s></span>
+                </div>
+                <p style="color:var(--muted-ink, #5b6b63);">SCENAR Sport D je aparat, ki omogoča hitro in učinkovito odpravljanje akutnih težav. Ta serija aparatov je namenjena za domačo uporabo. Aparat je po izgledu enak predhodniku toda je njegova funkcionalnost veliko večja. Dodana sta dva prednastavljena (avtomatsko prilagajanje parametrov) izbirna načina, ki sta namenjena zdravljenju akutnih stanj kot aktiviranju telesnih odzivov pri zdravljenju subakutnih kroničnih bolezni.</p>
+                <p style="color:var(--muted-ink, #5b6b63);">Naprava nam omogoča pregledovanje stanja v dveh načinih: D1 bistveno poenostavi postopek iskanja aktivnih točk s postavitvijo naprave znotraj izbranega območja in D2 poenostavi postopek iskanja aktivnega področja s premikanjem naprave po površini kože brez izgube stika.</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Enostaven za uporabo</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Nudi nam dovolj funkcij za reševanje akutnih težav</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Podpora, vzdrževanje, okrevanje, pospešitev zdravljenja v kateri koli starosti</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Odprava vseh vrst bolečin, oteklin, akutnih stanj</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zdravljenje »domačih« bolezni (poškodbe, opekline, piki, ureznine, …)</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">»Reševalna pomoč« v akutnih stanjih zase in za svoje najbližje doma in po svetu</li>
+                </ul>
+                <p style="font-weight:600;">Kontaktirajte nas glede roka dobave.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Pokličite · 040 580 902</a>
+                  <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20SCENAR%20Sport%20D" style="border:1.5px solid var(--deep, #384c42); color:var(--deep, #384c42); padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--tint, #dfe7e3);">Pišite nam</a>
+                </div>
+              </div>
+            </article>
+            <article style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:32px 64px; align-items:start;">
+              <img src="images/phoca_thumb_l_energyblanketwithtwoscreeninglayers-1000.webp" alt="Medicinska odeja" style="width:100%; aspect-ratio:1; object-fit:contain; background:#fbf9f4; border-radius:24px; padding:24px; box-sizing:border-box;">
+              <div style="display:flex; flex-direction:column; gap:18px;">
+                <div style="display:flex; justify-content:space-between; gap:16px 24px; align-items:baseline; flex-wrap:wrap;">
+                  <h2 style="font-size:40px; line-height:1;">Medicinska odeja</h2>
+                  <span style="font-family:'Instrument Serif', Georgia, serif; font-size:34px; color:var(--deep, #384c42); white-space:nowrap;">499 €</span>
+                </div>
+                <p style="color:var(--muted-ink, #5b6b63);"><strong style="font-weight:600; color:var(--ink, #1d2a24);">Kaj je medicinska odeja (RITM-ULM) in medicinska obleka?</strong> To so izdelki, sestavljeni iz več plasti posebne snovi, pritrjene na poseben način. V središču je metaliziran film in poseben netkani material brez dodatkov sintetike. Odeja aktivira proces samozdravljenja telesa (vir zdravilnih lastnosti).</p>
+                <p style="color:var(--muted-ink, #5b6b63);">Najbolj priljubljen izdelek je medicinska večplastna odeja. Na voljo je tudi terapevtska spalna vreča, podloga, pas, kapa, telovnik, kolenčniki itd. Ti izdelki se uporabljajo kot samostojno zdravljenje in v kombinaciji s SCENAR terapijo. Uporabljajo se tudi v kombinaciji s tradicionalnimi metodami zdravljenja.</p>
+                <p style="color:var(--muted-ink, #5b6b63);">Garancijska doba 1 leto, življenjska doba do 15 let. Velikosti odej so standardne (140×200, 160×200 in 200×200).</p>
+                <p style="color:var(--muted-ink, #5b6b63);">Terapevtska odeja in terapevtska oblačila bodo vašemu telesu pomagala aktivirati lastne moči za boj proti številnim boleznim, npr.:</p>
+                <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column;">
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Lajšanje sindroma kronične utrujenosti</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Normalizira metabolizem</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Znebite se glavobolov</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Pomoč pri zdravljenju bolečin v hrbtenici, bolečinah v sklepih</li>
+<li style="padding:12px 0; border-bottom:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">Zmanjšajo oksidativni stres, ki povzroča prezgodnje staranje, raka, napredovanje ateroskleroze</li>
+                </ul>
+                <p style="font-weight:600;">30 do 40 minut bivanja v zdravilni odeji se povrne na enak način kot nekaj ur dobrega spanca. Kontaktirajte nas glede roka dobave.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+38640580902" style="background:var(--deep, #384c42); color:#f3efe6; padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--accent, #5f8c74); color:#f3efe6;">Pokličite · 040 580 902</a>
+                  <a href="mailto:harmonijainzdravje@gmail.com?subject=Povpra%C5%A1evanje%3A%20Medicinska%20odeja" style="border:1.5px solid var(--deep, #384c42); color:var(--deep, #384c42); padding:14px 24px; border-radius:999px; font-weight:600; font-size:16px;" style-hover="background:var(--tint, #dfe7e3);">Pišite nam</a>
+                </div>
+              </div>
+            </article>
+          </div>
+          {{ waveToDark }}
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- KONTAKT -->
+    <sc-if value="{{ isKontakt }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="O nas">
+        <section style="background:var(--deep, #384c42); color:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(40px, 8vw, 80px) 28px 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:48px 64px; align-items:start;">
+            <div style="display:flex; flex-direction:column; gap:36px;">
+              <div style="display:flex; flex-direction:column; gap:20px;">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--on-deep-label, #b9cbc1); font-weight:600;">O nas</p>
+                <h1 style="font-size:clamp(40px, 6vw, 88px); line-height:0.98;">Z vami že od leta <em style="color:var(--on-deep-muted, #cddad3);">2005</em></h1>
+                <p style="font-size:19px; color:var(--on-deep-muted, #cddad3); max-width:480px;">Če vas zanimajo informacije o programih, ki jih izvajamo ali vas zanima kaj drugega, nas lahko kontaktirate preko telefonske številke ali elektronske pošte.</p>
+              </div>
+              <a href="tel:+38640580902" style="font-family:'Instrument Serif', Georgia, serif; font-size:clamp(44px, 6vw, 84px); line-height:1; letter-spacing:-0.03em; color:#f3efe6; align-self:flex-start;" style-hover="color:var(--on-deep-muted, #cddad3);">040 580 902</a>
+              <dl style="margin:0; display:grid; grid-template-columns:auto 1fr; gap:12px 28px; font-size:18px;">
+                <dt style="color:var(--on-deep-label, #b9cbc1);">E-pošta</dt>
+                <dd style="margin:0;"><a href="mailto:harmonijainzdravje@gmail.com" style="font-weight:600; text-decoration:underline; color:#f3efe6;">harmonijainzdravje@gmail.com</a></dd>
+                <dt style="color:var(--on-deep-label, #b9cbc1);">Delovni čas</dt>
+                <dd style="margin:0;">Pon. do pet. 8:00 do 16:00</dd>
+                <dt style="color:var(--on-deep-label, #b9cbc1);">Naslov</dt>
+                <dd style="margin:0;">Slovenska cesta 24, 1234 Mengeš</dd>
+              </dl>
+            </div>
+            <iframe title="Zemljevid: Slovenska cesta 24, Mengeš" src="./map/index.html" loading="lazy" style="width:100%; aspect-ratio:4/5; max-height:640px; border:0; border-radius:24px; background:var(--tint, #dfe7e3);"></iframe>
+          </div>
+          {{ waveToLight }}
+        </section>
+        <section style="background:#f3efe6; overflow:hidden;">
+          <div style="max-width:1320px; margin:0 auto; padding:clamp(48px, 7vw, 72px) 28px 40px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:40px 64px; align-items:center;">
+            <img src="images/MK301635-1000.webp" alt="Harmonija in zdravje" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:24px;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <h2 style="font-size:clamp(34px, 4vw, 52px); line-height:1;">Kdo <em>smo</em></h2>
+              <p style="font-size:20px;">Smo podjetje, ki se že od leta 2005 ukvarja tako s akutnimi kot tudi s kroničnimi zdravstvenimi težavami. Uporabljamo SCENAR tehnologijo za pomoč pri odkrivanju in odpravljanju vzroka težav. Na to smo dodali še masaže, ki pripomorejo k splošni sprostitvi in vplivajo na dobro počutje.</p>
+              <div style="display:flex; flex-direction:column; gap:8px; padding-top:8px; border-top:1px solid color-mix(in srgb, var(--deep, #384c42) 18%, transparent);">
+                <p style="font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent, #5f8c74); font-weight:600;">Naše poslanstvo</p>
+                <p style="font-family:'Instrument Serif', Georgia, serif; font-size:26px; line-height:1.25;">Vsi ljudje imajo na voljo pomoč za reševanje svojih težav na njihovi življenjski poti.</p>
+              </div>
+            </div>
+          </div>
+          <div style="max-width:1320px; margin:0 auto; padding:24px 28px clamp(48px, 7vw, 72px); display:flex; flex-direction:column; gap:40px;">
+            <h2 style="font-size:clamp(38px, 5.5vw, 80px); line-height:1;">Z vami <em>sva</em></h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:40px 64px; align-items:start;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <img src="images/MK301577-800.webp" alt="Tatiana Grigoryeva" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <p style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1.1;">Tatiana Grigoryeva</p>
+                  <p style="color:var(--muted-ink, #5b6b63);">Dr. med., spec. ginekologije in porodništva, spec. fiziatrije</p>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <img src="images/MK301574-800.webp" alt="Miha Premk" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px;">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <p style="font-family:'Instrument Serif', Georgia, serif; font-size:30px; line-height:1.1;">Miha Premk</p>
+                  <p style="color:var(--muted-ink, #5b6b63);">Scenar terapevt</p>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px; color:var(--muted-ink, #5b6b63);">
+                  <p>Miha Premk se je na terapevtsko pot podal pred slabim desetletjem. Od nekdaj ga je zanimalo delo z ljudmi in kako izboljšati fizično in psihično raven posameznika. Začel je z licenco osebnega trenerja ter opravil tečaj klasične masaže in tako pričel nabirati izkušnje. Glede na stopnjo zanimanja in osebnega vnosa je v predhodni službi hitro napredoval, postal vodja športnega oddelka in hkrati tudi maser.</p>
+                  <p>Ko je spoznal Scenar terapije se je zavedal, da je to smer v katero se želi poglobiti. Začel je izvajati prakso pri Tatiani Grigoryevi, ki je imela ordinacijo polno ljudi in tam pridobil veliko znanja. Ob želji, da se še bolje spozna s človeškim telesom in njegovim delovanjem se je odločil za študij fizioterapije. Študij mu je omogočil globje razumevanje vseh predhodnih izkušenj in mu oprl vrata za bolj strokoven pristop k svojem delu.</p>
+                  <p>Na poti izobraževanja vedno bolj spoznava in opaža pomembnost psihičnega stanja, moč misli in duhovno plat vsakega posameznika. Verjame, da lahko vsak s pomočjo pravih orodij in ljudi pride v stanje harmonije. Zagovarja preventivo na katero tudi sam polaga največ.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{ waveToDark }}
+        </section>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="background:var(--deep, #384c42); color:var(--on-deep-muted, #cddad3); border-top:1px solid rgba(243,239,230,0.12);">
+    <div style="max-width:1320px; margin:0 auto; padding:56px 28px 32px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap:32px; align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <img src="images/Miha_P__VIZITKA_logo-500.webp" alt="Harmonija in zdravje" style="height:40px; width:auto; background:#f3efe6; padding:6px 10px; border-radius:8px; align-self:flex-start;">
+        <p style="font-size:15px;">Uradni uvoznik naprav SCENAR.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:16px;">
+        <p style="font-weight:600; color:#f3efe6;">Kontakt</p>
+        <a href="tel:+38640580902" style="color:var(--on-deep-muted, #cddad3);">040 580 902</a>
+        <a href="mailto:harmonijainzdravje@gmail.com" style="color:var(--on-deep-muted, #cddad3);">harmonijainzdravje@gmail.com</a>
+        <p>Pon. do pet. 8:00 do 16:00</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:16px;">
+        <p style="font-weight:600; color:#f3efe6;">Lokacija</p>
+        <p>Slovenska cesta 24<br>1234 Mengeš</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:16px;">
+        <p style="font-weight:600; color:#f3efe6;">Strani</p>
+        <a href="#scenar" style="color:var(--on-deep-muted, #cddad3);">SCENAR terapija</a>
+        <a href="#bowen" style="color:var(--on-deep-muted, #cddad3);">Bownova terapija</a>
+        <a href="#masaze" style="color:var(--on-deep-muted, #cddad3);">Masaže</a>
+        <a href="#izdelki" style="color:var(--on-deep-muted, #cddad3);">Izdelki</a>
+        <a href="#kontakt" style="color:var(--on-deep-muted, #cddad3);">O nas</a>
+      </div>
+    </div>
+    <div style="max-width:1320px; margin:0 auto; padding:0 28px 28px; font-size:14px; color:var(--on-deep-label, #b9cbc1);">© {{ year }} Harmonija in Zdravje</div>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><div style="height:84px;"></div></sc-if>
+  </footer>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <a href="tel:+38640580902" style="position:fixed; left:16px; right:16px; bottom:16px; z-index:30; display:flex; justify-content:center; align-items:center; min-height:54px; background:var(--deep, #384c42); color:#f3efe6; border-radius:999px; font-weight:600; font-size:17px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">Pokličite 040 580 902</a>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;greenHue&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:148,&quot;min&quot;:90,&quot;max&quot;:190,&quot;step&quot;:1,&quot;unit&quot;:&quot;°&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Barva&quot;},&quot;greenSaturation&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:15,&quot;min&quot;:0,&quot;max&quot;:45,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Barva&quot;},&quot;greenLightness&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:26,&quot;min&quot;:10,&quot;max&quot;:40,&quot;step&quot;:1,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Barva&quot;},&quot;waveHeight&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:260,&quot;min&quot;:140,&quot;max&quot;:420,&quot;step&quot;:20,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Valovi&quot;},&quot;waveSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:10,&quot;min&quot;:4,&quot;max&quot;:40,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Valovi&quot;},&quot;scrollReaction&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.25,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Valovi&quot;}}">
+const PAGES = ['domov', 'scenar', 'bowen', 'masaze', 'izdelki', 'kontakt'];
+const NAV = [
+  ['domov', 'Domov'], ['scenar', 'SCENAR'], ['bowen', 'Bowen'],
+  ['masaze', 'Masaže'], ['izdelki', 'Izdelki'], ['kontakt', 'O nas'],
+];
+const TESTIMONIALS = [
+  { who: 'I. S.', text: 'Za Miho in Scenar terapije sem izvedela od prijateljev, ki jima bom večno hvaležna, saj mi je Miha petletne kronične bolečine v križu, ki sem jih blažila s protibolečinskimi tabletami, saniral v uro in pol dolgi terapiji. Sicer naj bi bil to mali čudež, ker bi bilo za tako dolgo trajajočo športno poškodbo potrebnih več terapij, a prav ta čudež je spremenil moj pogled na alternativne načine zdravljenja. Ker se mi je s terapijami izboljšalo tudi spanje in splošno počutje, ga redno obiskujem že več kot dve leti. Kot zapriseženi športnici, brez poškodb ne gre. Ker ne želim, da me bolečine omejujejo pri izvajanju športnih aktivnosti, sva se lotila tudi rame, za katero sva potrebovala nekaj več terapij, a zdaj brez kakršnekoli bolečin izvajam vse športne aktivnosti. Popolna terapija za telo in dušo. Zelo priporočam.' },
+  { who: 'G. Z.', text: 'Scenar terapija je super in zelo pomaga na različnih nivojih. Od telesnega, emocionalnega do psihičnega. Miha je strokovnjak in zelo rad pomaga človeku s tem, da se mu posveti in mu tudi razloži, kako terapija deluje. To poleg same terapije zelo pripomore k hitrejšemu izboljšanju situacije. Scenar terapija je učinkovita metoda, ki v današnjem času in tempu človeku lahko zelo pomaga.' },
+  { who: 'R. Č.', text: 'Za terapijo s skenerjem, nekateri temu rečejo elektro akupunktura, sem se odločil na osnovi predloga Mihata. Imam namreč luskavico, ki meni sicer ni moteča, ker je na skritem delu noge. Istočasno pa sem imel tudi probleme s kolenom, kjer imam obrabo hrustanca, se pravi degenerativne spremembe, in je bilo koleno 5 mesecev vneto, z oteklino, močnimi bolečniami (bil na protibolečinskih tabletah 2 meseca) ter »vodo« v kolenu, ki je bila dvakrat punktirana. K terapiji sem pristopil z »odprtimi rokami in odprte glave«, s ciljem, da poskusim nekaj neinvazivnega na telo in tudi dosežem izboljšanje stanja luskavice. Če bo bo, če ne pa tudi ok. Rezultat: luskavica se je zelo umirila, kar pa mi je še bolj pomembno, ni pa bil zadani cilj, da se je vnetje kolena umirilo, otekline ni, bolečine ni, vode ni. Sedaj z Mihatom delava vzdrževalno terapijo, da se trenutno stanje, ki je odločno, vzdržuje. Hvala Miha.' },
+  { who: 'J. & T.', text: 'Za obisk SCENAR terapije sva se najprej odločila kot pomoč pri zdravljenju astme, pregorelosti ter hude utrujenosti in izčrpanosti ob službah in dveh malih otrocih. Ko sva tekom terapij na lastni koži izkusila, kako neverjeten učinek ima terapija na naju in predvsem na kvaliteto našega družinskega življenja, sva se odločila, da se bova tudi sama naučila uporabljati SCENAR. Sedaj ga doma s pridom uporabljava na otrocih in naju. Otroka obiskujeta vrtec in nista skoraj nič bolna, ponoči spita normalno (kar prej nikoli nista), spremenila pa sva se tudi midva. Začela sva uživati v družinskem življenju. SCENAR je z nami vedno zraven (tudi na dopustu ;)) in je vedno prva pomoč pri roki za vsako-dnevne probleme.' },
+  { who: 'S. R.', text: 'S scenar terapijo sem se srečal pred več kot šestnajstimi leti in sem bil eden prvih pacientov gospe Tatiane. Že v mlajših letih sem imel težave s kolki. Reševal sem jih klasično z medicino (blokade in antibiotiki). Ko pa sem se srečal s Scenar tehnologijo sem bil seveda sprva skeptičen in trajalo je kar nekaj terapij, da mi je odleglo. Začel sem razumeti bistvo teh terapij, ki naše telo obravnavajo celostno in to fizikalno in čutno. Scenar tehnologija pomaga pri spreminjanju informacij, ki jih sprejema naše telo in to je bistvo. Primeren je za vse težave, predvsem pa ti pomaga ozavestiti sebe in pogled na lastno bivanje. Od tega trenutka sem bil reden gost v njeni terapevtski sobi in moram priznati, da sem iz terapije vedno odšel zadovoljen in prenovljen. Brez pretiravanja lahko rečem, da mi je Scenar tehnologija spremenila življenje in to na boljše. Uporabljam jo tudi preventivno. Ponižno sem hvaležen, da sem v življenju srečal gospo Tatiano in njen način zdravljenja. Vsem pa polagam na srce, da je potrebno vztrajati in ne pričakovati rezultata takoj po prvi terapiji.' },
+  { who: 'A. Š.', text: 'Poskusi, pa boš videl. Če dopustiš možnost, da je scenar učinkovit, pridejo tudi rezultati. Prepusti se torej moči te sugestije. Ob kakršnih koli bolečinah, ostalih neuravnoteženjih, s terapijo hitro prideš v homeostazo. Naj pohvalim terapevta Tatiano in Miha, ki s svojo strokovnostjo dodatno vlijeta zaupanje v sam uspeh terapije. Zgolj naša negativna prepričanja nam onemogočajo, da bi poskusili nekaj novega. Na posamezniku zavisi, kako se bo odločil. Terapija s scenarjem je očitno odločitev za življenje in izboljšanje njegove kvalitete in izkustev bivanja.' },
+];
+
+// ---- wave geometry ----
+const CREAM = [243, 239, 230];
+let DEEP = [56, 76, 66];
+function hslToRgb(h, s, l) {
+  s /= 100; l /= 100;
+  const k = n => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+  const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  return [f(0), f(8), f(4)].map(v => Math.round(v * 255));
+}
+function ramp(t) {
+  t = Math.min(1, Math.max(0, t));
+  return 'rgb(' + CREAM.map((v, k) => Math.round(v + (DEEP[k] - v) * t)).join(',') + ')';
+}
+// smooth sine wave with a second harmonic so it reads organic, not mechanical
+function wavePts(len, base, amp, waves, phase, N) {
+  const pts = [];
+  for (let i = 0; i <= N; i++) {
+    const u = i / N, x = u * len;
+    const y = base + amp * (Math.sin(u * waves * 2 * Math.PI + phase) + 0.12 * Math.sin(u * waves * 4 * Math.PI + phase));
+    pts.push([x, y]);
+  }
+  return pts;
+}
+function smoothPath(pts, swap) {
+  const P = swap ? pts.map(([x, y]) => [y, x]) : pts;
+  const f = v => v.toFixed(2);
+  let d = 'M' + f(P[0][0]) + ',' + f(P[0][1]);
+  for (let i = 1; i < P.length - 1; i++) {
+    const mx = (P[i][0] + P[i + 1][0]) / 2, my = (P[i][1] + P[i + 1][1]) / 2;
+    d += ' Q' + f(P[i][0]) + ',' + f(P[i][1]) + ' ' + f(mx) + ',' + f(my);
+  }
+  const L = P[P.length - 1];
+  return d + ' L' + f(L[0]) + ',' + f(L[1]);
+}
+// horizontal band stack: colour goes from `from` (top, = section bg) to `to` (bottom, = next section bg)
+function waveStack(from, to, h, speed, react, mobile) {
+  const W = 1440, bands = 10, paths = [];
+  // narrow viewports squeeze the viewBox, so a wide phase spread collapses the bands into one line
+  const step = mobile ? 0.085 : 0.22, off = mobile ? 0.55 : 0;
+  for (let k = 0; k < bands; k++) {
+    const t = k / (bands - 1);
+    const base = mobile ? 46 + t * (h - 76) : 56 + t * (h - 112);
+    const pts = wavePts(W, base, mobile ? 19 - 2 * t : 30 - 9 * t, mobile ? 0.85 : 1.15, off + k * step, 72);
+    const d = smoothPath(pts) + ' L' + W + ',' + (h + 80) + ' L0,' + (h + 80) + ' Z';
+    // depth parallax: top bands follow the pointer more than the deep ones; fast pointer motion lifts the crests
+    const fy = ((120 - 80 * t) * react).toFixed(1), fs = ((0.8 - 0.56 * t) * react).toFixed(3);
+    paths.push(React.createElement('g', {
+      key: k,
+      style: { transform: 'translateY(calc(var(--my, 0) * ' + fy + 'px)) scaleY(calc(1 + var(--mv, 0) * ' + fs + '))', transformOrigin: '50% 100%', transition: 'transform 0.9s cubic-bezier(.22,.61,.36,1)' },
+    }, React.createElement('g', {
+      style: { animation: 'bob ' + (speed * 0.7) + 's ease-in-out ' + (-k * 0.45) + 's infinite alternate' },
+    }, React.createElement('path', {
+      d, fill: ramp(from + (to - from) * t),
+      style: { animation: 'drift ' + speed + 's ease-in-out ' + (-k * 0.35) + 's infinite alternate' },
+    }))));
+  }
+  return React.createElement('svg', {
+    viewBox: '0 0 1440 ' + h, preserveAspectRatio: 'none', 'aria-hidden': true,
+    style: { display: 'block', width: '116%', marginLeft: '-8%', height: h + 'px', overflow: 'visible' },
+  }, paths);
+}
+// vertical band stack flowing down the right edge; bands go from `from` (left, section bg) to `to` (right)
+function waveSide(from, to, w, speed) {
+  const H = 900, bands = 9, paths = [];
+  for (let k = 0; k < bands; k++) {
+    const t = k / (bands - 1);
+    const base = 90 + t * (w - 160);
+    const pts = wavePts(H, base, 30 - 10 * t, 1.0, k * 0.22, 60);
+    const d = smoothPath(pts, true) + ' L' + w + ',' + H + ' L' + w + ',0 Z';
+    paths.push(React.createElement('path', {
+      key: k, d, fill: ramp(from + (to - from) * t),
+      style: { animation: 'driftY ' + speed + 's ease-in-out ' + (-k * 0.35) + 's infinite alternate' },
+    }));
+  }
+  return React.createElement('svg', {
+    viewBox: '0 0 ' + w + ' 900', preserveAspectRatio: 'none', 'aria-hidden': true,
+    style: { display: 'block', width: '100%', height: '116%', marginTop: '-8%' },
+  }, paths);
+}
+// photo mask: wavy top and bottom edges, objectBoundingBox units
+function clipDefs() {
+  const a = 0.045;
+  const top = wavePts(1, a, a * 0.9, 1.25, 0.4, 40);
+  const bot = wavePts(1, 1 - a, a * 0.9, 1.25, 2.6, 40).reverse();
+  const f = v => v.toFixed(4);
+  let d = 'M' + f(top[0][0]) + ',' + f(top[0][1]);
+  const q = P => { for (let i = 1; i < P.length - 1; i++) { d += ' Q' + f(P[i][0]) + ',' + f(P[i][1]) + ' ' + f((P[i][0] + P[i + 1][0]) / 2) + ',' + f((P[i][1] + P[i + 1][1]) / 2); } const L = P[P.length - 1]; d += ' L' + f(L[0]) + ',' + f(L[1]); };
+  q(top); d += ' L1,' + f(bot[0][1]); q(bot); d += ' Z';
+  return React.createElement('svg', { width: 0, height: 0, 'aria-hidden': true, style: { position: 'absolute' } },
+    React.createElement('defs', null, React.createElement('clipPath', { id: 'wavyClip', clipPathUnits: 'objectBoundingBox' }, React.createElement('path', { d }))));
+}
+
+class Component extends DCLogic {
+  state = { page: 'domov', tIdx: 0, isMobile: false, menuOpen: false };
+  onMq = () => {
+    const m = window.innerWidth <= 720;
+    if (m !== this.state.isMobile) this.setState({ isMobile: m, menuOpen: false });
+  };
+  readHash = () => {
+    const h = (window.location.hash || '').replace('#', '');
+    const page = PAGES.includes(h) ? h : 'domov';
+    this.setState({ page, menuOpen: false });
+    window.scrollTo(0, 0);
+  };
+  energy = 0; raf = null; sv = 0; lastY = null;
+  onScroll = () => {
+    const y = window.scrollY;
+    if (this.lastY != null) {
+      const dy = y - this.lastY;
+      this.sv = Math.max(-1, Math.min(1, this.sv + dy / 140));
+      this.energy = Math.min(1, this.energy + Math.abs(dy) / 700);
+    }
+    this.lastY = y;
+    if (!this.raf) this.tick();
+  };
+  tick = () => {
+    this.energy *= 0.94; this.sv *= 0.9;
+    const r = document.documentElement.style;
+    r.setProperty('--mv', this.energy.toFixed(3));
+    r.setProperty('--my', this.sv.toFixed(3));
+    this.raf = (this.energy > 0.004 || Math.abs(this.sv) > 0.004) ? requestAnimationFrame(this.tick) : null;
+  };
+  palette() {
+    const h = this.props.greenHue ?? 148, s = this.props.greenSaturation ?? 15, l = this.props.greenLightness ?? 26;
+    const hsl = (ss, ll) => 'hsl(' + h + ' ' + ss + '% ' + ll + '%)';
+    return { h, s, l, deep: hsl(s, l), accent: hsl(s + 4, Math.min(62, l + 20)), muted: hsl(s, 83), label: hsl(s, 76), tint: hsl(Math.max(12, s), 89), ink: hsl(20, 14), mutedInk: hsl(8, 39) };
+  }
+  applyPalette() {
+    const p = this.palette(), r = document.documentElement.style;
+    r.setProperty('--deep', p.deep); r.setProperty('--accent', p.accent);
+    r.setProperty('--on-deep-muted', p.muted); r.setProperty('--on-deep-label', p.label); r.setProperty('--tint', p.tint);
+    r.setProperty('--ink', p.ink); r.setProperty('--muted-ink', p.mutedInk);
+  }
+  componentDidUpdate() { this.applyPalette(); }
+  componentDidMount() {
+    this.setState({ isMobile: window.innerWidth <= 720 });
+    window.addEventListener('resize', this.onMq, { passive: true });
+    this.applyPalette();
+    this.readHash();
+    window.addEventListener('hashchange', this.readHash);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.readHash);
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+  renderVals() {
+    const { page, tIdx } = this.state;
+    const p = this.palette(); DEEP = hslToRgb(p.h, p.s, p.l);
+    const n = TESTIMONIALS.length;
+    const speed = this.props.waveSpeed ?? 10;
+    const react = this.props.scrollReaction ?? 0.25;
+    const h = Math.round((this.props.waveHeight ?? 260) * (this.state.isMobile ? 0.55 : 1));
+    return {
+      navItems: NAV.map(([id, label]) => ({
+        href: '#' + id, label,
+        color: page === id ? p.accent : p.ink,
+        border: page === id ? p.accent : 'transparent',
+      })),
+      isMobile: this.state.isMobile,
+      isDesktop: !this.state.isMobile,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      isDomov: page === 'domov', isScenar: page === 'scenar', isBowen: page === 'bowen',
+      isMasaze: page === 'masaze', isIzdelki: page === 'izdelki', isKontakt: page === 'kontakt',
+      waveToLight: waveStack(1, 0, h, speed, react, this.state.isMobile),
+      waveToDark: waveStack(0, 1, h, speed, react, this.state.isMobile),
+      testimonial: TESTIMONIALS[tIdx],
+      testimonialCounter: (tIdx + 1) + ' / ' + n,
+      prevTestimonial: () => this.setState(s => ({ tIdx: (s.tIdx - 1 + n) % n })),
+      nextTestimonial: () => this.setState(s => ({ tIdx: (s.tIdx + 1) % n })),
+      year: new Date().getFullYear(),
+    };
+  }
+}
+</script>
+</body>
+</html>
